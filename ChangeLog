@@ -1,3 +1,25 @@
+2012-07-07  Dirk Eddelbuettel  <edd@debian.org>
+
+	* vignettes/RcppCNPy-intro.Rnw: Added vignette documentation
+
+	* demo/timings.R: Added simple timing benchmark demo
+
+2012-07-06  Dirk Eddelbuettel  <edd@debian.org>
+
+	* src/cnpy.h: Include cstdint for int64_t if C++11 has been enabled
+	* src/cnpyMod.cpp: Support integer types if C++11 available
+
+	* tests/: Simple set of regression tests added
+
+2012-07-05  Dirk Eddelbuettel  <edd@dexter>
+
+	* src/cnpyMod.cpp: Added transpose() method to transparently deal
+	with the Fortran-vs-C storage order difference between Python and R.
+	Also added support for reading vectors.
+
+	* src/cnpy.{cpp,h}: Added support for loading from .npy.gz files
+	which is automagically enabled if the filename ends in ".gz"
+
 2012-07-04  Dirk Eddelbuettel  <edd@debian.org>
 
 	* Initial version 0.0.1
