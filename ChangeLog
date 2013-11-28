@@ -1,3 +1,37 @@
+2013-11-28  Dirk Eddelbuettel  <edd@debian.org>
+
+	* DESCRIPTION: Version 0.2.1
+
+	* DESCRIPTION: Import methods and Rcpp
+	* NAMESPACE: Idem
+
+	* src/cnpy.h: Synchronized with version in cnpy repo
+	* src/cnpy.cpp: Idem
+
+2013-02-20  Dirk Eddelbuettel  <edd@debian.org>
+
+	* src/cnpyMod.cpp (npyHasIntegerSupport): New function to test if
+	integer support was compiled in, also exported via Rcpp Modules to R
+	* man/RcppCNPy-package.Rd: Added documentation entry
+
+	* tests/loadFiles.R: Updated regression test to use run-time integer
+	support check, and test integer support if available
+	* tests/loadFiles.Rout.save: Updated accordingly
+
+	* RcppCNPy-intro.Rnw: Updated the discussion of integer support and
+	clarified that only RcppCNPy needs to be rebuilt with -std=c++11
+	* DESCRIPTION: Idem
+
+	* inst/THANKS: Added to show thanks to Carl and Gong
+
+2013-02-19  Dirk Eddelbuettel  <edd@debian.org>
+
+	* src/cnpy.h: Define R_NO_REMAP before including Rinternals to not
+	define length(), error(), ... but rather Rf_length(), Rf_error()
+
+	* src/cnpy.cpp: Add a bogus unused variable at the never-reached end
+	of code (after an error exit) to silence the pedantic mode of g++
+
 2012-07-30  Dirk Eddelbuettel  <edd@debian.org>
 
 	* DESCRIPTION: Version 0.2.0
