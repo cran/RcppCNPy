@@ -1,8 +1,8 @@
 Package: RcppCNPy
 Type: Package
 Title: Rcpp bindings for NumPy files
-Version: 0.2.1
-Date: 2013-11-28
+Version: 0.2.2
+Date: 2013-11-29
 Author: Dirk Eddelbuettel
 Maintainer: Dirk Eddelbuettel <edd@debian.org>
 Description: This package use the cnpy library written by Carl Rogers to
@@ -16,7 +16,7 @@ LazyLoad: yes
 Imports: methods, Rcpp
 LinkingTo: Rcpp
 RcppModules: cnpy
-Packaged: 2013-11-28 20:21:38.009963 UTC; edd
+Packaged: 2013-11-29 23:10:28.685947 UTC; edd
 NeedsCompilation: yes
 Repository: CRAN
-Date/Publication: 2013-11-28 22:04:25
+Date/Publication: 2013-11-30 06:51:36

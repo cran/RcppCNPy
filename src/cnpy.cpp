@@ -15,13 +15,13 @@
 #include<cstring>
 #include<iomanip>
 
-#include <endian.h>
+#include <Rconfig.h>            // use R configuration test result for endianness
 
 char cnpy::BigEndianTest() {
-#if __BYTE_ORDER != __LITTLE_ENDIAN
-    return '<';                 // little endian
+#ifdef WORDS_BIGENDIAN
+    return '>';                 // if defined, we have big endian
 #else
-    return '>';
+    return '<';                 // else (the default) it is little endian
 #endif
 }
 

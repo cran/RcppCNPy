@@ -1,5 +1,5 @@
-d86a9ee47fab2c3b92f491e490edb04f *ChangeLog
-da5bc3e69840ba7923373037fee8fc2d *DESCRIPTION
+5aade7c9b058b6e0fa71fe67d489ef32 *ChangeLog
+1bd866e87cfa56448d0322a141d2dc2a *DESCRIPTION
 4f0d4452dea14f1c5292b1f6b5a8058a *NAMESPACE
 00a51f48e80330031b4dea441b068e06 *R/cnpy.R
 13b1f2e071d093da9d5fea8e5f74f922 *README.md
@@ -7,15 +7,15 @@ dbed46c002c1159eacc13e0132bb8805 *build/vignette.rds
 10ca8b30705755e1625db55fec52a28b *cleanup
 7561ac0a0f07e84b1f192ec278ed29dc *demo/00Index
 8d3bfb5d0f737566a55c1f262ef2c364 *demo/timings.R
-2be9ce961e7c172c99876867766003a5 *inst/NEWS.Rd
+b3157fc6edf496f25b7b8c104d83e7d8 *inst/NEWS.Rd
 873a03255f01ba3895cff538b8f291ba *inst/THANKS
 c92af8b4130a47d221587bd285f4fd25 *inst/doc/RcppCNPy-intro.R
 1e3b21c90510eda4fbd767da044de4a7 *inst/doc/RcppCNPy-intro.Rnw
-9b53ba3673940194b7a0456575130cb4 *inst/doc/RcppCNPy-intro.pdf
+7258fc7fb69640d4bf2255ae4f431c83 *inst/doc/RcppCNPy-intro.pdf
 d2b17f09d7fef653a5dd76a7c0e0c813 *man/RcppCNPy-package.Rd
 fc20c19902f391819ec1d94bf10ecfe1 *src/Makevars
 c41c45ef3617bd1d86d8d83113304e11 *src/Makevars.win
-ba853bce924d1f76fd91fc25dde24784 *src/cnpy.cpp
+baa299b324243eaafbc9c94feacad057 *src/cnpy.cpp
 55b36a7226353560b636b62526959389 *src/cnpy.h
 f1c0894fa7cc65d2ec3d63e28f5bd7b7 *src/cnpyMod.cpp
 70e193d3d8a842f868281c655fe9933f *tests/createFiles.py
@@ -27,4 +27,6 @@ c6e7291eb0dec6960ca8e829aa23f506 *tests/ivec.npy
 03757ce27c33243b2f771e91880da1e6 *tests/loadFiles.R
 8e09a4048b69b4f1e181fe6fb791e267 *tests/loadFiles.Rout.save
 175477c843a1fa756967aaefa5f38b88 *tests/loadFiles.py
+d35c98a4e37d0140e9122e1afbfaf3ec *tests/saveAndLoad.R
+b4aef0c70229fb0f2bc9963786d7b2f6 *tests/saveAndLoad.Rout.save
 1e3b21c90510eda4fbd767da044de4a7 *vignettes/RcppCNPy-intro.Rnw
