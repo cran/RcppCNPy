@@ -1,3 +1,81 @@
+2015-01-05  Dirk Eddelbuettel  <edd@debian.org>
+
+	* DESCRIPTION: Version 0.2.4
+
+	* inst/NEWS.Rd: Updated with release news
+
+2015-01-05  Wush Wu <wush978@gmail.com>
+
+	* src/cnpyMod.cpp: Correct the clone() instantiation for big endian
+
+2015-01-04  Dirk Eddelbuettel  <edd@debian.org>
+
+	* DESCRIPTION: Add Wush to Author:, bump Date: and Version:
+
+	* src/cnpy.h: Remove BigEndianTest()
+	* src/cnpy.cpp: Always set header entry to little endian
+	* src/cnpyMod.cpp: Use Rcpp::clone() for deep copy
+	* tests/saveAndLoad.R: Some simplifications
+	* tests/saveAndLoad.Rout.save: Updated corresponding reference output
+
+2015-01-04  Wush Wu <wush978@gmail.com>
+
+	* src/cnpy.cpp: Make BigEndianTest() unconditional
+	* src/cnpy.h: Move swapEndian() here and use in header
+	* src/cnpyMod.cpp:
+	  - Correct saved size for matrices,
+	  - Ensure deep copy prior to swapping endianness
+	* tests/saveAndLoad.R: Add more tests
+
+2015-01-03  Dirk Eddelbuettel  <edd@debian.org>
+
+	* DESCRIPTION: Bump Date: and Version:
+
+	* src/cnpyMod.cpp: Several corrections on file save:
+	  - Correct saving on integer matrices and vectors by
+	    testing for integer before testing for numeric (which is always true
+	    for int as well)
+	  - Convert integer object to int64_t and save as int64_t
+	  - For good measure, properly specify template type when saving
+	  - [So far untested] On big endian systems, convert before writing
+
+	* tests/saveAndLoad.R: Added tests for saving (and loading) of both
+	uncompressed and compressed integer matrices
+	* tests/saveAndLoad.Rout.saev: Updated corresponding reference output
+
+2015-01-02  Dirk Eddelbuettel  <edd@debian.org>
+
+	* src/cnpyMod.cpp: Apply correction by Wush Wu to correct (if needed)
+	for endianness before instantiating vectors when reading from file
+
+2015-01-01  Dirk Eddelbuettel  <edd@debian.org>
+
+	* src/cnpyMod.cpp: Move byte-swap call off into helper functions
+
+2014-12-31  Dirk Eddelbuettel  <edd@debian.org>
+
+	* src/cnpyMod.cpp: Correct call to byte swap for big endian systems
+
+2014-12-28  Dirk Eddelbuettel  <edd@debian.org>
+
+	* DESCRIPTION: Edited Title: and Description:; bumped Date: and Version:
+
+	* tests/loadFiles.R: Print results; remove test for [known] int support
+	* tests/loadFiles.Rout.save: Updated as well
+
+2014-12-01  Romain Francois  <romain@r-enthusiasts.com>
+
+	* src/cnpyMod.cpp: Use const_iterator
+
+2014-08-05  Dirk Eddelbuettel  <edd@debian.org>
+
+	* src/cnpyMod.cpp: Attempt to deal with big endian for int64 and double
+
+2014-08-04  Dirk Eddelbuettel  <edd@debian.org>
+
+	* vignettes/RcppCNPy-intro.Rnw: Do not assume 'system("gzip ...")'
+	  works because, y'a know, there is Windoze...
+
 2014-04-10  Dirk Eddelbuettel  <edd@debian.org>
 
 	* DESCRIPTION: Version 0.2.3

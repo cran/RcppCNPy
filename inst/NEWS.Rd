@@ -2,6 +2,20 @@
 \title{News for Package \pkg{RcppCNPy}}
 \newcommand{\cpkg}{\href{http://CRAN.R-project.org/package=#1}{\pkg{#1}}}
 
+\section{Changes in version 0.2.4 (2015-01-05)}{
+  \itemize{
+    \item Support for saving integer objects was not correct and has been
+    fixed
+    \item Support for loading and saving on 'big endian' systems was
+    incomplete, has been greatly expanded and corrected, thanks in large
+    part to very diligent testing as well as patching by Wush Wu
+    \item The implementation now uses const iterators, thanks to a pull
+    request by Romain Francois
+    \item The vignette no longer assumes that one can call \code{gzip}
+    via \code{system} as the world's leading consumer OS may disagree.
+  }
+}
+
 \section{Changes in version 0.2.3 (2014-04-10)}{
   \itemize{
     \item \code{src/Makevars} now sets \code{CXX_STD = CXX11} which also

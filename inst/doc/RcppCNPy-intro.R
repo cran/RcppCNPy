@@ -31,20 +31,13 @@ vec
 
 
 ###################################################
-### code chunk number 5: RcppCNPy-intro.Rnw:178-179
+### code chunk number 5: RcppCNPy-intro.Rnw:178-179 (eval = FALSE)
 ###################################################
-system("gzip -f fmat.npy")
+## mat2 <- npyLoad("fmat.npy.gz")
 
 
 ###################################################
-### code chunk number 6: RcppCNPy-intro.Rnw:182-184
-###################################################
-mat2 <- npyLoad("fmat.npy.gz")
-mat2
-
-
-###################################################
-### code chunk number 7: RcppCNPy-intro.Rnw:194-201
+### code chunk number 6: RcppCNPy-intro.Rnw:189-196
 ###################################################
 set.seed(42)
 m <- matrix(sort(rnorm(6)), 3, 2)
@@ -56,9 +49,9 @@ npySave("simplevec.npy", v)
 
 
 ###################################################
-### code chunk number 9: RcppCNPy-intro.Rnw:301-305
+### code chunk number 8: RcppCNPy-intro.Rnw:296-300
 ###################################################
-unlink("fmat.npy.gz")
+unlink("fmat.npy")
 unlink("fvec.npy")
 unlink("randmat.npy")
 unlink("simplevec.npy")

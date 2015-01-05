@@ -28,7 +28,8 @@ T transpose(const T & m) {      // tranpose for IntegerMatrix / NumericMatrix, s
     //Rcpp::Rcout << "Transposing " << n << " by " << k << std::endl;
     T z(n, k);
     int sz1 = n*k-1;
-    typename T::iterator mit, zit;
+    typename T::const_iterator mit ;
+    typename T::iterator zit;
     for (mit = m.begin(), zit = z.begin(); mit != m.end(); mit++, zit += n) {
         if (zit >= z.end()) zit -= sz1;
         *zit = *mit;
@@ -60,9 +61,15 @@ Rcpp::RObject npyLoad(const std::string & filename, const std::string & type, co
     if (shape.size() == 1) {
         if (type == "numeric") {
             double *p = reinterpret_cast<double*>(arr.data);
+#ifdef WORDS_BIGENDIAN
+            std::transform(p, p + shape[0], p, swap_endian<double>);
+#endif
             ret = Rcpp::NumericVector(p, p + shape[0]);
         } else if (type == "integer") {
             int64_t *p = reinterpret_cast<int64_t*>(arr.data);
+#ifdef WORDS_BIGENDIAN
+            std::transform(p, p + shape[0], p, swap_endian<int64_t>);
+#endif
             ret = Rcpp::IntegerVector(p, p + shape[0]);
         } else {
             arr.destruct();
@@ -70,18 +77,26 @@ Rcpp::RObject npyLoad(const std::string & filename, const std::string & type, co
         } 
     } else if (shape.size() == 2) {
         if (type == "numeric") {
+            double *p = reinterpret_cast<double*>(arr.data);
+#ifdef WORDS_BIGENDIAN
+            std::transform(p, p + shape[0] * shape[1], p, swap_endian<double>);
+#endif
             // invert dimension for creation, and then tranpose to correct Fortran-vs-C storage
             if (dotranspose) {
-                ret = transpose(Rcpp::NumericMatrix(shape[1], shape[0], reinterpret_cast<double*>(arr.data)));
+                ret = transpose(Rcpp::NumericMatrix(shape[1], shape[0], p));
             } else {
-                ret = Rcpp::NumericMatrix(shape[0], shape[1], reinterpret_cast<double*>(arr.data));
+                ret = Rcpp::NumericMatrix(shape[0], shape[1], p);
             }
         } else if (type == "integer") {
+            int64_t *p = reinterpret_cast<int64_t*>(arr.data);
+#ifdef WORDS_BIGENDIAN
+            std::transform(p, p + shape[0] * shape[1], p, swap_endian<int64_t>);
+#endif
             // invert dimension for creation, and then tranpose to correct Fortran-vs-C storage
             if (dotranspose) {
-                ret = transpose(Rcpp::IntegerMatrix(shape[1], shape[0], reinterpret_cast<int64_t*>(arr.data)));
+                ret = transpose(Rcpp::IntegerMatrix(shape[1], shape[0], p));
             } else {
-                ret = transpose(Rcpp::IntegerMatrix(shape[0], shape[1], reinterpret_cast<int64_t*>(arr.data)));
+                ret = Rcpp::IntegerMatrix(shape[0], shape[1], p);
             }
         } else {
             arr.destruct();
@@ -97,46 +112,65 @@ Rcpp::RObject npyLoad(const std::string & filename, const std::string & type, co
 
 void npySave(std::string filename, Rcpp::RObject x, std::string mode) { 
     if (::Rf_isMatrix(x)) {
-        if (::Rf_isNumeric(x)) {
+        if (::Rf_isInteger(x)) {
+            Rcpp::IntegerMatrix mat = transpose(Rcpp::IntegerMatrix(x));
+            std::vector<int64_t> vec(mat.ncol()*mat.nrow());
+            std::copy(mat.begin(), mat.end(), vec.begin());
+#ifdef WORDS_BIGENDIAN
+            std::transform(vec.begin(), vec.end(), vec.begin(), swap_endian<int64_t>);
+#endif
+            std::vector<unsigned int> shape = 
+                Rcpp::as<std::vector<unsigned int> >(Rcpp::IntegerVector::create(mat.ncol(), mat.nrow()));
+            if (hasEnding(filename, ".gz")) {
+                cnpy::npy_gzsave<int64_t>(filename, &(vec[0]), &(shape[0]), 2); 	// no mode, overwrite only
+            } else {
+                cnpy::npy_save<int64_t>(filename, &(vec[0]), &(shape[0]), 2, mode);
+            }
+        } else if (::Rf_isNumeric(x)) {
             Rcpp::NumericMatrix mat = transpose(Rcpp::NumericMatrix(x));
+#ifdef WORDS_BIGENDIAN
+            std::transform(mat.begin(), mat.end(), mat.begin(), swap_endian<double>);
+#endif
             std::vector<unsigned int> shape = 
                 Rcpp::as<std::vector<unsigned int> >(Rcpp::IntegerVector::create(mat.ncol(), mat.nrow()));
             
             if (hasEnding(filename, ".gz")) {
-                cnpy::npy_gzsave(filename, mat.begin(), &(shape[0]), 2); 	// no mode, overwrite only
+                cnpy::npy_gzsave<double>(filename, mat.begin(), &(shape[0]), 2); 	// no mode, overwrite only
             } else {
-                cnpy::npy_save(filename, mat.begin(), &(shape[0]), 2, mode);
-            }
-        } else if (::Rf_isInteger(x)) {
-            Rcpp::IntegerMatrix mat = transpose(Rcpp::IntegerMatrix(x));
-            std::vector<unsigned int> shape = 
-                Rcpp::as<std::vector<unsigned int> >(Rcpp::IntegerVector::create(mat.ncol(), mat.nrow()));
-            if (hasEnding(filename, ".gz")) {
-                cnpy::npy_gzsave(filename, mat.begin(), &(shape[0]), 2); 	// no mode, overwrite only
-            } else {
-                cnpy::npy_save(filename, mat.begin(), &(shape[0]), 2, mode);
+                cnpy::npy_save<double>(filename, mat.begin(), &(shape[0]), 2, mode);
             }
         } else {
             Rf_error("Unsupported matrix type\n");
         }
     } else if (::Rf_isVector(x)) {
-        if (::Rf_isNumeric(x)) {
-            Rcpp::NumericVector vec(x);
-            std::vector<unsigned int> shape = 
-                Rcpp::as<std::vector<unsigned int> >(Rcpp::IntegerVector::create(vec.length()));
-            if (hasEnding(filename, ".gz")) {
-                cnpy::npy_gzsave(filename, vec.begin(), &(shape[0]), 1); 	// no mode, append only
-            } else {
-                cnpy::npy_save(filename, vec.begin(), &(shape[0]), 1, mode);
-            }
-        } else if (::Rf_isInteger(x)) {
+        if (::Rf_isInteger(x)) {
             Rcpp::IntegerVector vec(x);
+            std::vector<int64_t> v(vec.size());
+            std::copy(vec.begin(), vec.end(), v.begin());
+#ifdef WORDS_BIGENDIAN
+            std::transform(v.begin(), v.end(), v.begin(), swap_endian<int64_t>);
+#endif
             std::vector<unsigned int> shape = 
                 Rcpp::as<std::vector<unsigned int> >(Rcpp::IntegerVector::create(vec.length()));
             if (hasEnding(filename, ".gz")) {
-                cnpy::npy_gzsave(filename, vec.begin(), &(shape[0]), 1);	// no mode, append only
+                cnpy::npy_gzsave<int64_t>(filename, &(v[0]), &(shape[0]), 1);	// no mode, append only
             } else {
-                cnpy::npy_save(filename, vec.begin(), &(shape[0]), 1, mode);
+                cnpy::npy_save<int64_t>(filename, &(v[0]), &(shape[0]), 1, mode);
+            }
+        } else if (::Rf_isNumeric(x)) {
+            Rcpp::Rcout << "Saving Numeric Vector\n";
+#ifdef WORDS_BIGENDIAN
+            Rcpp::NumericVector vec(Rcpp::clone(x)); // ensures a deep copy
+            std::transform(vec.begin(), vec.end(), vec.begin(), swap_endian<double>);
+#else
+            Rcpp::NumericVector vec(x);
+#endif
+            std::vector<unsigned int> shape = 
+                Rcpp::as<std::vector<unsigned int> >(Rcpp::IntegerVector::create(vec.length()));
+            if (hasEnding(filename, ".gz")) {
+                cnpy::npy_gzsave<double>(filename, vec.begin(), &(shape[0]), 1); 	// no mode, append only
+            } else {
+                cnpy::npy_save<double>(filename, vec.begin(), &(shape[0]), 1, mode);
             }
         } else {
             Rf_error("Unsupported vector type\n");
