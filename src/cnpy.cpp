@@ -5,7 +5,7 @@
 //license available in LICENSE file, or at http://www.opensource.org/licenses/mit-license.php
 
 // Changes for RcppCNPy are 
-// Copyright (C) 2012 - 2013  Dirk Eddelbuettel
+// Copyright (C) 2012 - 2016  Dirk Eddelbuettel
 // and licensed under GNU GPL (>= 2) 
 
 #include"cnpy.h"
@@ -129,13 +129,13 @@ cnpy::NpyArray load_the_npy_file(FILE* fp) {
     unsigned int ndims, word_size;
     bool fortran_order;
     cnpy::parse_npy_header(fp,word_size,shape,ndims,fortran_order);
-    //unsigned long long size = 1; //long long so no overflow when multiplying by word_size
-    unsigned long size = 1; //long long so no overflow when multiplying by word_size
+    unsigned long long size = 1; //long long so no overflow when multiplying by word_size
     for(unsigned int i = 0;i < ndims;i++) size *= shape[i];
 
     cnpy::NpyArray arr;
     arr.word_size = word_size;
     arr.shape = std::vector<unsigned int>(shape,shape+ndims);
+    delete[] shape;
     arr.data = new char[size*word_size];    
     arr.fortran_order = fortran_order;
     size_t nread = fread(arr.data,word_size,size,fp);
@@ -149,13 +149,13 @@ cnpy::NpyArray gzload_the_npy_file(gzFile fp) {
     unsigned int ndims, word_size;
     bool fortran_order;
     cnpy::parse_npy_gzheader(fp,word_size,shape,ndims,fortran_order);
-    //unsigned long long size = 1; //long long so no overflow when multiplying by word_size
-    unsigned long size = 1; //long long so no overflow when multiplying by word_size
+    unsigned long long size = 1; //long long so no overflow when multiplying by word_size
     for(unsigned int i = 0;i < ndims;i++) size *= shape[i];
 
     cnpy::NpyArray arr;
     arr.word_size = word_size;
     arr.shape = std::vector<unsigned int>(shape,shape+ndims);
+    delete[] shape;
     arr.data = new char[size*word_size];    
     arr.fortran_order = fortran_order;
     size_t nread = gzread(fp,arr.data,word_size*size);

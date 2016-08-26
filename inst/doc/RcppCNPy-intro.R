@@ -8,7 +8,7 @@ prettyDate <- format(Sys.Date(), "%B %e, %Y")
 
 
 ###################################################
-### code chunk number 3: RcppCNPy-intro.Rnw:151-157
+### code chunk number 3: RcppCNPy-intro.Rnw:152-158
 ###################################################
 library(methods)
 library(RcppCNPy)
@@ -19,7 +19,7 @@ npySave("fvec.npy", v)
 
 
 ###################################################
-### code chunk number 4: RcppCNPy-intro.Rnw:160-167
+### code chunk number 4: RcppCNPy-intro.Rnw:161-168
 ###################################################
 library(RcppCNPy)
 
@@ -31,13 +31,13 @@ vec
 
 
 ###################################################
-### code chunk number 5: RcppCNPy-intro.Rnw:178-179 (eval = FALSE)
+### code chunk number 5: RcppCNPy-intro.Rnw:179-180 (eval = FALSE)
 ###################################################
 ## mat2 <- npyLoad("fmat.npy.gz")
 
 
 ###################################################
-### code chunk number 6: RcppCNPy-intro.Rnw:189-196
+### code chunk number 6: RcppCNPy-intro.Rnw:190-197
 ###################################################
 set.seed(42)
 m <- matrix(sort(rnorm(6)), 3, 2)
@@ -49,7 +49,7 @@ npySave("simplevec.npy", v)
 
 
 ###################################################
-### code chunk number 8: RcppCNPy-intro.Rnw:296-300
+### code chunk number 8: RcppCNPy-intro.Rnw:298-302
 ###################################################
 unlink("fmat.npy")
 unlink("fvec.npy")
