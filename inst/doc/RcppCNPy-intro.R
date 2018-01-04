@@ -1,4 +1,5 @@
 ## ----echo = FALSE, message = FALSE---------------------------------------
+knitr::opts_chunk$set(python.reticulate = FALSE)
 if (identical(Sys.info()[['sysname']], "Windows")) {
     knitr::opts_chunk$set(eval = FALSE)                                      
     msg <- paste("Note: Some examples in this vignette require Python", 
