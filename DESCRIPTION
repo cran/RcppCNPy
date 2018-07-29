@@ -1,8 +1,8 @@
 Package: RcppCNPy
 Type: Package
 Title: Read-Write Support for 'NumPy' Files via 'Rcpp'
-Version: 0.2.9
-Date: 2018-03-22
+Version: 0.2.10
+Date: 2018-07-29
 Author: Dirk Eddelbuettel and Wush Wu
 Maintainer: Dirk Eddelbuettel <edd@debian.org>
 Description: The 'cnpy' library written by Carl Rogers provides read and write
@@ -17,9 +17,9 @@ License: GPL (>= 2)
 Depends: R (>= 3.1.0)
 Imports: methods, Rcpp
 LinkingTo: Rcpp
-Suggests: knitr, rmarkdown, pinp
+Suggests: knitr, rmarkdown, pinp, reticulate
 VignetteBuilder: knitr
 NeedsCompilation: yes
-Packaged: 2018-03-22 22:57:38.654803 UTC; edd
+Packaged: 2018-07-29 19:18:01.11984 UTC; edd
 Repository: CRAN
-Date/Publication: 2018-03-22 23:09:19 UTC
+Date/Publication: 2018-07-29 19:40:03 UTC

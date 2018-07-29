@@ -1,5 +1,5 @@
 ## ----echo = FALSE, message = FALSE---------------------------------------
-knitr::opts_chunk$set(python.reticulate = FALSE)
+knitr::opts_chunk$set(python.reticulate = TRUE)
 if (identical(Sys.info()[['sysname']], "Windows")) {
     knitr::opts_chunk$set(eval = FALSE)                                      
     msg <- paste("Note: Some examples in this vignette require Python", 
@@ -19,6 +19,7 @@ vec
 
 ## ----rex2, eval=FALSE----------------------------------------------------
 #  mat2 <- npyLoad("fmat.npy.gz")
+#  mat2
 
 ## ----rex3----------------------------------------------------------------
 set.seed(42)
