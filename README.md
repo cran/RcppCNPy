@@ -1,7 +1,12 @@
 ## RcppCNPy: Rcpp bindings for NumPy files
 
-[![Build Status](https://travis-ci.org/eddelbuettel/rcppcnpy.svg)](https://travis-ci.org/eddelbuettel/rcppccnpy) [![License](http://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg?style=flat)](http://www.gnu.org/licenses/gpl-2.0.html) [![CRAN](http://www.r-pkg.org/badges/version/RcppCNPy)](https://cran.r-project.org/package=RcppCNPy) [![Downloads](http://cranlogs.r-pkg.org/badges/RcppCNPy?color=brightgreen)](http://www.r-pkg.org/pkg/RcppCNPy)
-[![status](http://joss.theoj.org/papers/6afd88394721d1f421f5a023467a8b86/status.svg)](http://joss.theoj.org/papers/6afd88394721d1f421f5a023467a8b86)
+[![CI](https://github.com/eddelbuettel/rcppcnpy/workflows/ci/badge.svg)](https://github.com/eddelbuettel/rcppcnpy/actions?query=workflow%3Aci)
+[![License](http://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg?style=flat)](http://www.gnu.org/licenses/gpl-2.0.html) 
+[![CRAN](http://www.r-pkg.org/badges/version/RcppCNPy)](https://cran.r-project.org/package=RcppCNPy) 
+[![Dependencies](https://tinyverse.netlify.com/badge/RcppCNPy)](https://cran.r-project.org/package=RcppCNPy) 
+[![Downloads](http://cranlogs.r-pkg.org/badges/RcppCNPy?color=brightgreen)](https://www.r-pkg.org:443/pkg/RcppCNPy) 
+[![Last Commit](https://img.shields.io/github/last-commit/eddelbuettel/rcppcnpy)](https://github.com/eddelbuettel/rcppcnpy)  
+[![status](https://joss.theoj.org/papers/10.21105/joss.00055/status.svg)](https://joss.theoj.org/papers/10.21105/joss.00055) 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.155066.svg)](https://doi.org/10.5281/zenodo.155066)
 
 ### About
@@ -11,7 +16,7 @@ written by Carl Rogers to provide read and write facilities for files created
 with (or for) the NumPy extension for Python.  Vectors and matrices of
 numeric types can be read or written to and from files as well as compressed
 files. Support for integer files is available if the package has been built
-with -std=c++11 which is the default starting with release 0.2.3 following
+with `-std=c++11` which is the default starting with release 0.2.3 following
 the release of R 3.1.0, and available on all platforms following the release
 of R 3.3.0 with the updated 'Rtools'.
 

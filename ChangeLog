@@ -1,3 +1,57 @@
+2022-03-24  Dirk Eddelbuettel  <edd@debian.org>
+
+	* DESCRIPTION (Version, Date): Release 0.2.11
+
+	* vignettes/*.Rnw: Created to Rnw wrappers for pdf vignettes
+	* vignettes/rmd/*: Moved Rmd and bib files from vignettes/
+	* vignettes/pdf/*: Moved pdf vignettes/ created from Rmd
+
+	* DESCRIPTION (Suggests): Removed knitr and rmarkdown
+	* DESCRIPTION (VignetteBuilder): Removed
+	* .Rbuildignore: Expanded
+
+2021-12-08  Dirk Eddelbuettel  <edd@debian.org>
+
+	* README.md: Remove unused continuous integration artifact and badge
+
+2021-04-24  Dirk Eddelbuettel  <edd@debian.org>
+
+	* DESCRIPTION (URL): Add repo
+
+2021-04-15  Dirk Eddelbuettel  <edd@debian.org>
+
+	* README.md: Update two URLs to https
+
+2021-01-03  Dirk Eddelbuettel  <edd@debian.org>
+
+        * .github/workflows/ci.yaml: Add CI runner using r-ci
+	* README.md: Add new badge
+
+2020-06-20  Dirk Eddelbuettel  <edd@debian.org>
+
+	* .travis.yml: Upgrade to 'bionic' and R 4.0.0
+
+2020-06-19  Dirk Eddelbuettel  <edd@debian.org>
+
+	* README.md: Add 'last commit' badge
+
+2019-04-05  Dirk Eddelbuettel  <edd@debian.org>
+
+	* README.md: Add dependency badge
+
+	* vignettes/UsingReticulate.Rmd: Added brief section on 3d-arrays
+
+	* tests/createFiles.py: Created three-dim array for vignette
+
+2018-11-16  Dirk Eddelbuettel  <edd@debian.org>
+
+	* man/RcppCNPy-package.Rd: Add that 32bit integer and 64bit floats
+	are the key types, and casting may be needed from other width.
+
+2018-09-02  Dirk Eddelbuettel  <edd@debian.org>
+
+	* .travis.yml: Switch Travis CI to R 3.5 repo
+
 2018-07-29  Dirk Eddelbuettel  <edd@debian.org>
 
 	* DESCRIPTION (Version, Date): Release 0.2.10
